@@ -105,10 +105,10 @@ function modbus_widgets_init() {
 		'name'          => esc_html__( 'Sidebar', 'modbus' ),
 		'id'            => 'sidebar-1',
 		'description'   => esc_html__( 'Add widgets here.', 'modbus' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
+		'before_widget' => '<div id="%1$s" class="card mb-4 %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h5 class="card-header">',
+		'after_title'   => '</h5>',
 	) );
 }
 add_action( 'widgets_init', 'modbus_widgets_init' );

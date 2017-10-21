@@ -1,7 +1,7 @@
 === Modern Business ===
 
-Contributors: automattic
-Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+Contributors: Pradeep Tirmal, StartBootstrap
+Tags: modern-business, bootstrap4, starter-theme, vanilla-bootstrap
 
 Requires at least: 4.0
 Tested up to: 4.8
