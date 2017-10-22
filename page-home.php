@@ -1,49 +1,45 @@
 <?php
 /* Template Name: Home Page */
 
-	get_header();
+    $carousel_description = get_field('carousel_description');
+    $carousel_image = get_field('carousel_image');
+    global $wp_query;
+
+    get_header();
 ?>
 
-	<header>
-  		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-	        <ol class="carousel-indicators">
-	          	<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-	          	<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-	          	<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-	        </ol>
-	        <div class="carousel-inner" role="listbox">
-	          <!-- Slide One - Set the background image for this slide in the line below -->
-	          	<div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
-		            <div class="carousel-caption d-none d-md-block">
-		              	<h3>First Slide</h3>
-		             	<p>This is a description for the first slide.</p>
-		            </div>
-	          	</div>
-				<!-- Slide Two - Set the background image for this slide in the line below -->
-				<div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-					<div class="carousel-caption d-none d-md-block">
-						<h3>Second Slide</h3>
-						<p>This is a description for the second slide.</p>
-					</div>
-				</div>
-				<!-- Slide Three - Set the background image for this slide in the line below -->
-				<div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-					<div class="carousel-caption d-none d-md-block">
-						<h3>Third Slide</h3>
-						<p>This is a description for the third slide.</p>
-					</div>
-				</div>
-			</div>
-			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</a>
-			<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
-      </div>
-    </header>
+
+    <section>
+        <div id="theCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+            <ol class="carousel-indicators">
+                <li data-target="#theCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#theCarousel" data-slide-to="1"></li>
+                <li data-target="#theCarousel" data-slide-to="2"></li>
+            </ol>
+
+            <div class="carousel-inner" role="listbox">
+                <?php $loop = new WP_Query( array ( 'post_type' => 'carousel', 'orderby' => 'post_id', 'order' => 'ASC') ); ?>
+                <?php while( $loop->have_posts() ): $loop->the_post(); ?>
+                    <div class="carousel-item" style="background-image: url('<?php the_field('carousel_image'); ?>')">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3><?php the_title(); ?></h3>
+                            <p><?php the_field('carousel_description'); ?></p>
+                        </div>
+                    </div>
+                <?php endwhile; wp_reset_query();?>
+            </div>
+
+            <a class="carousel-control-prev" href="#theCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#theCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </section>
+
 
 	<div class="container">
 
