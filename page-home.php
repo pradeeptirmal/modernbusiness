@@ -3,8 +3,8 @@
 
     $carousel_description = get_field('carousel_description');
     $carousel_image = get_field('carousel_image');
-    global $wp_query;
-
+    $carousel_wrap = 0;
+    $carousel_ind = 0;
     get_header();
 ?>
 
@@ -12,15 +12,16 @@
     <section>
         <div id="theCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
             <ol class="carousel-indicators">
-                <li data-target="#theCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#theCarousel" data-slide-to="1"></li>
-                <li data-target="#theCarousel" data-slide-to="2"></li>
+                <?php $loop = new WP_Query( array ( 'post_type' => 'carousel', 'orderby' => 'post_id', 'order' => 'ASC') ); ?>
+                <?php while( $loop->have_posts() ): $loop->the_post(); $carousel_ind++; ?>
+                    <li data-target="#theCarousel" data-slide-to="<?php echo $carousel_ind; ?>" class="<?php if( $carousel_ind == 1 ) echo 'active' ?>""></li>
+                <?php endwhile; wp_reset_query();?>
             </ol>
 
             <div class="carousel-inner" role="listbox">
                 <?php $loop = new WP_Query( array ( 'post_type' => 'carousel', 'orderby' => 'post_id', 'order' => 'ASC') ); ?>
-                <?php while( $loop->have_posts() ): $loop->the_post(); ?>
-                    <div class="carousel-item" style="background-image: url('<?php the_field('carousel_image'); ?>')">
+                <?php while( $loop->have_posts() ): $loop->the_post(); $carousel_wrap++; ?>
+                    <div class="carousel-item <?php if( $carousel_wrap == 1 ) echo 'active' ?>" style="background-image: url('<?php the_field('carousel_image'); ?>')">
                         <div class="carousel-caption d-none d-md-block">
                             <h3><?php the_title(); ?></h3>
                             <p><?php the_field('carousel_description'); ?></p>
